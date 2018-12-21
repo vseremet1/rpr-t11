@@ -31,4 +31,7 @@ public class Drzava {
     public void setGlavni_grad(int glavni_grad) {
         this.glavni_grad = glavni_grad;
     }
+
+    public void setGlavniGrad(Grad sarajevo) {
+    }
 }
