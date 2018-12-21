@@ -40,4 +40,13 @@ public class Grad {
     }
 
 
+    public void setBrojStanovnika(int i) {
+    }
+
+    public void setDrzava(Drzava francuska) {
+    }
+
+    public int getBrojStanovnika() {
+        return broj_stanovnika;
+    }
 }
