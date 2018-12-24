@@ -34,4 +34,12 @@ public class Drzava {
 
     public void setGlavniGrad(Grad sarajevo) {
     }
+
+    @Override
+    public String toString() {
+        return
+                "ID=" + ID +
+                ", Naziv='" + Naziv + '\'' +
+                ", glavni_grad=" + glavni_grad ;
+    }
 }
