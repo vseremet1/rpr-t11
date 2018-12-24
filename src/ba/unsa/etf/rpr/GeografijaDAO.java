@@ -24,7 +24,7 @@ public class GeografijaDAO {
                 Statement statement = connection.createStatement();
                 statement.execute("CREATE TABLE 'Grad' (\n" +
                         "ID integer primary key,\n" +
-                        "Naziv Text\n" +
+                        "Naziv Text,\n" +
                         "broj_stanovnika integer,\n" +
                         "Drzava integer references 'Drzava' (ID)\n" +
                         "\n" +
@@ -108,7 +108,7 @@ public class GeografijaDAO {
     public ArrayList<Grad> gradovi() throws SQLException {
 
         ArrayList<Grad> gradovi = new ArrayList<>();
-        Grad grad = new Grad();
+
 
 
         Statement statement = connection.createStatement();
@@ -117,7 +117,8 @@ public class GeografijaDAO {
 
         while (resultSet.next())
         {
-            grad.setID(resultSet.getInt(1));
+            Grad grad = new Grad();
+             grad.setID(resultSet.getInt(1));
             grad.setNaziv(resultSet.getString(2));
             grad.setBroj_stanovnika(resultSet.getInt(3));
             grad.setD(resultSet.getInt(4));
