@@ -168,4 +168,8 @@ public class GeografijaDAO {
         String upit = "UPDATE Grad SET ("+g+")";
          statement.executeQuery(upit);
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }
