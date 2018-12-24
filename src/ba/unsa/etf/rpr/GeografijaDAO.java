@@ -7,35 +7,33 @@ import java.util.ArrayList;
 public class GeografijaDAO {
 
     private static GeografijaDAO geografija = new GeografijaDAO(); // privatna referenca na vlastitu klasu
-    Connection connection = null;
+    private Connection connection = null;
 
     private GeografijaDAO()   //privatni konstruktor bez parametara
     {
         try
         {
-
             connection = DriverManager.getConnection("jdbc:sqlite:sqlite(1).db");
-
-
             Statement statement = connection.createStatement();
            statement.execute("SELECT * from Grad ");
         }
         catch (Exception e)
         {
             try {
+                assert connection != null;
                 Statement statement = connection.createStatement();
                 statement.execute("CREATE TABLE 'Grad' (\n" +
                         "ID integer primary key,\n" +
                         "Naziv Text\n" +
-                        " broj_stanovnika integer,\n" +
-                        "  Drzava integer references 'Drzava' (ID)\n" +
+                        "broj_stanovnika integer,\n" +
+                        "Drzava integer references 'Drzava' (ID)\n" +
                         "\n" +
                         ");\n" +
                         "\n" +
                         "CREATE  TABLE 'Drzava'(\n" +
                         "ID integer primary key,\n" +
-                        "  Naziv text,\n" +
-                        "  glavni_grad integer references 'Grad' (ID)\n" +
+                        "Naziv text,\n" +
+                        "glavni_grad integer references 'Grad' (ID)\n" +
                         "\n" +
                         "\n" +
                         ");\n" +
@@ -55,12 +53,11 @@ public class GeografijaDAO {
                 Statement s4 = connection.createStatement();
                 Statement s5 = connection.createStatement();
 
-
-                s1.executeUpdate(grad1);
-                s2.executeUpdate(grad2);
-                s3.executeUpdate(grad3);
-                s4.executeUpdate(grad4);
-                s5.executeUpdate(grad5);
+                s1.execute(grad1);
+                s2.execute(grad2);
+                s3.execute(grad3);
+                s4.execute(grad4);
+                s5.execute(grad5);
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
@@ -68,25 +65,28 @@ public class GeografijaDAO {
         }
     }
 
-    public static GeografijaDAO getInstance() throws SQLException //javna metoda getInstance vraća instancu i poziva initialize po potrebi
+    public static GeografijaDAO getInstance()  //javna metoda getInstance vraća instancu i poziva initialize po potrebi
 
     {
-
         return geografija;
     }
 
     public static void removeInstance() {
+        geografija=null;
     }
-
 
     public Grad glavniGrad(String drzava) {
         Grad grad = new Grad();
-        // @Language ("SQLite")
+
 
         try {
             Statement statement = connection.createStatement();
             String upit = "SELECT * from Grad";
             ResultSet resultSet = statement.executeQuery(upit);
+            grad.ID= resultSet.getInt(1);
+            grad.Naziv=resultSet.getString(2);
+            grad.broj_stanovnika=resultSet.getInt(3);
+            grad.drzava = resultSet.getInt(4);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,36 +95,76 @@ public class GeografijaDAO {
     }
 
 
-    public void obrisiDrzavu(String drzava) {
+    public void obrisiDrzavu(String drzava) throws SQLException {
 
+        Statement statement = connection.createStatement();
+        String izbrisi = ("DELETE FROM Table WHERE name = " + drzava + ";");
+        // brise i gradove ??
 
+        statement.executeQuery(izbrisi);
     }
 
 
-    public ArrayList<Grad> gradovi() {
+    public ArrayList<Grad> gradovi() throws SQLException {
 
         ArrayList<Grad> gradovi = new ArrayList<>();
+        Grad grad = new Grad();
+
+
+        Statement statement = connection.createStatement();
+        String upitGradovi   = "SELECT * FROM Grad ORDER BY broj_stanovnika DESC" ;
+        ResultSet resultSet = statement.executeQuery(upitGradovi);
+
+        while (resultSet.next())
+        {
+            grad.setID(resultSet.getInt(1));
+            grad.setNaziv(resultSet.getString(2));
+            grad.setBroj_stanovnika(resultSet.getInt(3));
+            grad.setD(resultSet.getInt(4));
+            gradovi.add(grad);
+        }
 
         return gradovi;
     }
 
-    public void dodajGrad(Grad grad) {
+    public void dodajGrad(Grad grad) throws SQLException {
+        Statement statement = connection.createStatement();
+        String g  = grad.toString();
+        String upitDodajGrad = ("INSERT INTO Grad VALUES"+g);
+        statement.executeQuery(upitDodajGrad);
+    }
+
+    public void dodajDrzavu(Drzava drzava) throws SQLException {
+
+        Statement statement = connection.createStatement();
+        String g  = drzava.toString();
+        String upitDodajDrzavu = ("INSERT INTO Drzava VALUES"+g);
+        statement.executeQuery(upitDodajDrzavu);
 
     }
 
-    public void dodajDrzavu(Drzava drzava) {
+     public Drzava nadjiDrzavu(String drzava) throws SQLException {
+
+        Statement statement= connection.createStatement();
+        String upit = "SELECT * FROM Drzava WHERE Naziv = drzava ";
+        ResultSet resultSet = statement.executeQuery(upit);
+        Drzava drzava1 = new Drzava();
+
+        if (!resultSet.next()) return null;
+
+        drzava1.setID(resultSet.getInt(1));
+        drzava1.setNaziv(resultSet.getString(2));
+        drzava1.setGlavni_grad(resultSet.getInt(3));
+
+        return drzava1;
+
 
     }
 
-    public void izmjeniDrzavu(Grad grad) {
-
-    }
-
-    public Drzava nadjiDrzavu(String drzava) {
-        return null;
-    }
-
-
-    public void izmijeniGrad(Grad bech) {
+    public void izmijeniGrad(Grad grad) throws SQLException {
+        Statement statement = connection.createStatement();
+        String g = grad.toString();
+        String upit = "UPDATE Grad SET ("+g+")";
+         statement.executeQuery(upit);
     }
 }
