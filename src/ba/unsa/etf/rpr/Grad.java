@@ -5,7 +5,7 @@ public class Grad {
     int ID;
     String Naziv;
     int broj_stanovnika;
-    Drzava d;
+    int drzava;
 
     public int getID() {
         return ID;
@@ -31,12 +31,12 @@ public class Grad {
         this.broj_stanovnika = broj_stanovnika;
     }
 
-    public ba.unsa.etf.rpr.Drzava getDrzava() {
-        return d;
+    public int getDrzava() {
+        return drzava;
     }
 
-    public void setD(Drzava d) {
-        this.d = d;
+    public void setD(int drzava) {
+        this.drzava = drzava;
     }
 
 
@@ -48,5 +48,13 @@ public class Grad {
 
     public int getBrojStanovnika() {
         return broj_stanovnika;
+    }
+
+    @Override
+    public String toString() {
+        return  "ID=" + ID +
+                ", Naziv='" + Naziv + '\'' +
+                ", broj_stanovnika=" + broj_stanovnika +
+                ", drzava=" + drzava ;
     }
 }
