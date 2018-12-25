@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static javafx.application.Application.launch;
@@ -30,8 +32,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Locale.setDefault(new Locale("bs", "BA"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader( getClass().getResource(
+                "/viewer.fxml" ), bundle);
+
         Parent root = FXMLLoader.load(getClass().getResource("viewer.fxml"));
-        primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
