@@ -33,12 +33,12 @@ public class Viewer {
     public void dodajDrzavu(ActionEvent actionEvent) {
     }
 
-    /*public void stampajKnjige(ActionEvent actionEvent) {
+    public void stampajKnjige(ActionEvent actionEvent) {
 
         try {
             new GradoviReport().showReport(GeografijaDAO.getInstance().getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
         }
-    }*/
+    }
 }
