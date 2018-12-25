@@ -159,7 +159,6 @@ public class GeografijaDAO {
 
         return drzava1;
 
-
     }
 
     public void izmijeniGrad(Grad grad) throws SQLException {
