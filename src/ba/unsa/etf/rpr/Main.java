@@ -1,18 +1,18 @@
 package ba.unsa.etf.rpr;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static javafx.application.Application.launch;
 
-public class Main  {
+public class Main extends Application {
 
 
     public static String ispisiGradove() throws SQLException {
@@ -28,18 +28,15 @@ public class Main  {
         return string;
     }
 
-
-     public void start(Stage primaryStage) throws Exception{
-
-        GeografijaDAO model=GeografijaDAO.getInstance();
-
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("gradovi.fxml" ));
-        loader.setController(new Viewer(model));
-        Parent root=loader.load();
-        primaryStage.setTitle("Gradovi");
-        primaryStage.setScene(new Scene(root, 600, 400));
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("viewer.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
+
+
     public static void main(String[] args) throws SQLException {
         GeografijaDAO dao = GeografijaDAO.getInstance();
         System.out.println("Gradovi su:\n" + ispisiGradove());
