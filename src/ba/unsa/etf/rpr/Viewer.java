@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import net.sf.jasperreports.engine.JRException;
 
+import java.io.IOException;
+import java.util.Locale;
+
 public class Viewer {
     public TextField Grad;
     public TextField Drzava;
@@ -25,7 +28,21 @@ public class Viewer {
         Grad= (TextField) keyEvent.getTarget();
         String grad = Grad.getText();
 
+    }
 
+    public void dodajEngleski (ActionEvent actionEvent) throws IOException {
+       Main.load(Locale.forLanguageTag("en"));
+    }
+
+    public void dodajBosanski (ActionEvent actionEvent) throws IOException {
+       Main.load(Locale.forLanguageTag("bs"));
+    }
+
+    public void dodajFrancuski (ActionEvent actionEvent) throws IOException {
+        Main.load(Locale.forLanguageTag("fr"));
+    }
+    public  void dodajNjemacki (ActionEvent actionEvent) throws IOException {
+        Main.load(Locale.forLanguageTag("de"));
 
     }
 

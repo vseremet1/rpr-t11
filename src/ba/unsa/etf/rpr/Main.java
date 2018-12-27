@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -16,6 +17,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application {
 
+    private static  Stage stage;
 
     public static String ispisiGradove() throws SQLException {
         GeografijaDAO gd =GeografijaDAO.getInstance();
@@ -30,25 +32,32 @@ public class Main extends Application {
         return string;
     }
 
+    public static void load (Locale locale) throws IOException {
+
+
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+           Parent root = FXMLLoader.load( Main.class.getResource(
+                "viewer.fxml" ), bundle);
+        stage.setScene(new Scene(root, 300, 275));
+        stage.show();
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+
+        Main.stage = primaryStage;
         Locale.setDefault(Locale.forLanguageTag("bs"));
-        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-        Parent root = FXMLLoader.load( getClass().getResource(
-                "viewer.fxml" ), bundle);
+        Main.load(Locale.getDefault());
 
-        //loader.setController(new Viewer());
-       // Parent root =loader.load();
-
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
     }
 
 
     public static void main(String[] args) throws SQLException {
         GeografijaDAO dao = GeografijaDAO.getInstance();
         System.out.println("Gradovi su:\n" + ispisiGradove());
-        glavniGrad();
+       // glavniGrad();
         launch(args);
 
     }
@@ -57,7 +66,7 @@ public class Main extends Application {
         System.out.println("Unesite ime drzave: ");
         Scanner ulaz = new Scanner(System.in);
 
-        String drzava = ulaz.nextLine();
+       // String drzava = ulaz.nextLine();
 
     }
 }
