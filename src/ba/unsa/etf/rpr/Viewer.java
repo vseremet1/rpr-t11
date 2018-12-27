@@ -14,6 +14,7 @@ public class Viewer {
     GeografijaDAO model ;
     public Viewer () {
 
+        model = GeografijaDAO.getInstance();
     }
 
     public Viewer(GeografijaDAO model) {

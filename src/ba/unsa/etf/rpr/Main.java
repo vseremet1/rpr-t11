@@ -34,11 +34,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Locale.setDefault(Locale.forLanguageTag("bs"));
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-        FXMLLoader loader = FXMLLoader.load( getClass().getResource(
+        Parent root = FXMLLoader.load( getClass().getResource(
                 "viewer.fxml" ), bundle);
 
-        loader.setController(new Viewer());
-        Parent root =loader.load();
+        //loader.setController(new Viewer());
+       // Parent root =loader.load();
 
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
