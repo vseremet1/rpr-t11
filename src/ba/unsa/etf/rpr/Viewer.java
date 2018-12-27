@@ -12,6 +12,10 @@ public class Viewer {
     public Button DodajGrad;
     public Button DodajDrzava;
     GeografijaDAO model ;
+    public Viewer () {
+
+    }
+
     public Viewer(GeografijaDAO model) {
         this.model=model;
     }
