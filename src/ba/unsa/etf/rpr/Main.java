@@ -32,7 +32,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Locale.setDefault(new Locale("bs", "BA"));
+        Locale.setDefault(Locale.forLanguageTag("bs"));
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader( getClass().getResource(
                 "/viewer.fxml" ), bundle);
