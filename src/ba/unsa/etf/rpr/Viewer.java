@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import net.sf.jasperreports.engine.JRException;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -62,5 +65,20 @@ public class Viewer {
         } catch (JRException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public void save(ActionEvent actionEvent) {
+
+
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(null);
+
+
+
+
+
+
+
+
     }
 }

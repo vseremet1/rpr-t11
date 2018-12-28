@@ -8,8 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ba.unsa.etf.rpr.Viewer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Viewer">
    <children>
       <TextField fx:id="Grad" layoutX="174.0" layoutY="87.0" onKeyTyped="#Grad" text="%Grad" />
       <TextField fx:id="Drzava" layoutX="174.0" layoutY="151.0" onKeyTyped="#Drzava" text="%Drzava" />
@@ -20,12 +19,19 @@
         <items>
             <Menu mnemonicParsing="false" text="%Jezik">
               <items>
-                <MenuItem mnemonicParsing="false" text="%engleski" onAction="#dodajEngleski" />
-                  <MenuItem mnemonicParsing="false" text="%bosanski" onAction="#dodajBosanski" />
-                  <MenuItem mnemonicParsing="false" text="%francuski" onAction="#dodajFrancuski" />
-                  <MenuItem mnemonicParsing="false" text="%njemacki" onAction="#dodajNjemacki" />
+                <MenuItem mnemonicParsing="false" onAction="#dodajEngleski" text="%engleski" />
+                  <MenuItem mnemonicParsing="false" onAction="#dodajBosanski" text="%bosanski" />
+                  <MenuItem mnemonicParsing="false" onAction="#dodajFrancuski" text="%francuski" />
+                  <MenuItem mnemonicParsing="false" onAction="#dodajNjemacki" text="%njemacki" />
               </items>
             </Menu>
+        </items>
+      </MenuButton>
+      <MenuButton layoutX="144.0" layoutY="14.0" mnemonicParsing="false" text="File">
+        <items>
+          <MenuItem fx:id="save" mnemonicParsing="false" onAction="#save" text="Save as" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
         </items>
       </MenuButton>
    </children>
